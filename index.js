@@ -11,7 +11,9 @@ const app = express()
 
 require('./config/passport')(passport);
 
-mongoose.connect('mongodb://localhost/MawarLebah',{ 
+const db = require('./config/key').MongoURI;
+
+mongoose.connect(db,{ 
     useUnifiedTopology: true,
     useNewUrlParser: true
 })

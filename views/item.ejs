@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>item</title>
+</head>
+<body class="bg-gray-400">
+    <%- include('user/navbar') %> 
+    <div class="container mx-auto font-mono ">
+        <div class="flex justify-center py-6 px-6 my-12">
+            <div class="w-auto xl:w-3/4 lg:w-11/12 flex">
+                <div
+                    class="w-auto h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg" style="background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80')">
+                </div>
+                <div class="w-auto lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
+                    <div class="px-8 mb-4 text-center">
+                        <h3 class="pt-4 mb-2 text-2xl"><%= item.name %>  </h3>
+                        <p class="mb-4 text-sm text-gray-700">
+                            <%= item.description %> 
+                        </p>
+                    </div>
+                <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+                            Price = $<%= item.price %> 
+                        </label>
+                        <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+                            Stock = <%= item.stock %> 
+                        </label>
+                    </div>
+                    <div class="mb-6 text-center">
+                        <button
+                                class="w-full px-4 py-2 font-bold text-white bg-red-500 rounded-full hover:bg-red-700 focus:outline-none focus:shadow-outline"
+                                type="button">
+                                add to chart
+                        </button>
+                    </div>
+                        <hr class="mb-6 border-t" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

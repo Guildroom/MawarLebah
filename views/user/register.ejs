@@ -43,6 +43,14 @@
                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="password">Password</label>
                 <input type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="password" id="password">
               </div>
+              <div class="inline-flex rounded-lg">
+                <input type="radio" name="admin" id="user" value="user" checked hidden/>
+                <label for="user" class="radio text-center self-center py-2 px-4 rounded-lg cursor-pointer hover:opacity-75">User</label>
+              </div>
+              <div class="inline-flex rounded-lg">
+                <input type="radio" name="admin" id="admin" value="admin" hidden/>
+                <label for="admin" class="radio text-center self-center py-2 px-4 rounded-lg cursor-pointer hover:opacity-75">Admin</label>
+              </div>
               <div class="text-center mt-6">
                 <button class="bg-blueGray-800 text-black active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="submit"> Register </button>
               </div>
@@ -53,3 +61,10 @@
     </section>
 </body>
 </html>
+
+<style>
+  input:checked ~ .radio {
+    color:white;
+    background-color: green;
+  }
+</style>

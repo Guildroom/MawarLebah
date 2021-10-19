@@ -1,4 +1,5 @@
-const passport = require('passport');
+const passport = require('passport')
+const { ensureAuthenticated } = require('../config/checkAuth')
 const express = require('express')
 const bycrypt = require('bcryptjs')
 const User = require('./../models/User')
@@ -12,8 +13,24 @@ router.get('/register',(req, res)=> {
     res.render('user/register')
 })
 
+router.get('/item',(req, res)=> {
+    res.render('user/item')
+})
+
+router.get('/', ensureAuthenticated, (req, res) => res.render('user/index', {
+    name: req.user.name,
+    email: req.user.email,
+    deskripsi: req.user.description
+}))
+
+router.get('/editprofile', ensureAuthenticated, (req, res) => res.render('user/editProfile', {
+    name: req.user.name,
+    email: req.user.email,
+    deskripsi: req.user.description
+}))
+
 router.post('/register',(req,res)=>{
-    const { name, email, password} = req.body;
+    const { name, email, password, admin} = req.body;
     let errors = [];
     if (!name || !email || !password) {
         errors.push({ msg: 'Please enter all fields' });
@@ -26,7 +43,8 @@ router.post('/register',(req,res)=>{
             errors,
             name,
             email,
-            password
+            password,
+            admin
         });
     } else {
         User.findOne({ email: email }).then(user => {
@@ -36,16 +54,19 @@ router.post('/register',(req,res)=>{
                     errors,
                     name,
                     email,
-                    password
+                    password,
+                    admin
                 });
             } else {
                 const newUser = new User({
                     name,
                     email,
-                    password
+                    password,
+                    admin
                 });
                 bycrypt.genSalt(10, (err, salt) => {
                     bycrypt.hash(newUser.password, salt, (err, hash) => {
+                        if (err) throw err;
                         newUser.password = hash;
                         newUser
                             .save()
@@ -64,16 +85,22 @@ router.post('/register',(req,res)=>{
     }
 })
 
-router.get('/',(req, res)=> {
-    res.render('user/index')
-})
-
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/user/login',
-        failureFlash: true
-    })(req, res, next);
+router.post('/login', async (req, res, next) => {
+    const user = await User.findOne({ email: req.body.email })
+    if (user.admin == 'user') {
+        passport.authenticate('local', {
+            successRedirect: '/user',
+            failureRedirect: '/user/login',
+            failureFlash: true
+        })(req, res, next);
+    }
+    else{
+        passport.authenticate('local', {
+            successRedirect: '/admin',
+            failureRedirect: '/user/login',
+            failureFlash: true
+        })(req, res, next);
+    }
 });
 
 router.get('/logout', (req, res) => {

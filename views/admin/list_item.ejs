@@ -7,14 +7,15 @@
 <body>
     <div class="flex h-screen w-full bg-white ">
         <%-include('component/navdar') %>
-        <div id="menu" class="container mx-auto px-4 pt-6 lg:pb-64">
+        <div id="menu" class="container px-4 pt-6 lg:pb-64">
             <div class="flex flex-wrap text-center justify-center">
             <div class="w-full lg:w-6/12 px-4">
                 <h2 class="text-4xl font-semibold text-black">Item</h2>
             </div>
             </div>
-            <div class="flex flex-wrap mt-12 justify-start">
-                <div class="grid grid-cols-1 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 gap-4">
+            <div class="flex flex-wrap auto-rows-min mt-12 justify-center">
+                <div class="grid grid-cols-1 sm:grid-cols-8 md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8 gap-4">
+                    <% item.forEach(item => { %> 
                     <div class="col-span-2 sm:col-span-1 xl:col-span-1">
                         <img
                         alt="..."
@@ -23,43 +24,25 @@
                         />
                     </div>
                     <div class="col-span-2 sm:col-span-4 xl:col-span-4">
-                        <h3 class="font-semibold text-black">old watch</h3>
+                        <h3 class="font-semibold text-black"><%= item.name %> </h3>
                         <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        <%=item.description %> 
                         </p>
                     </div>
-                    <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic ">$22</div>
-            
+                    <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic ">$<%= item.price %> </div>
+                    <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic "><%= item.stock %> </div>
                     <div class="col-span-2 sm:col-span-1 xl:col-span-1">
-                        <img
-                        alt="..."
-                        src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80"
-                        class="h-24 w-24 rounded  mx-auto"
-                        />
+                        <h1 class="font-semibold mb-2 p-2 bg-green-500 text-gray-100 text-lg rounded-lg focus:border-2 border-green-300 flex justify-center">edit</h1>
+                        <h1 class="font-semibold p-2 bg-red-500 text-gray-100 text-lg rounded-lg focus:border-2 border-red-300 flex justify-center">delete</h1>
                     </div>
-                    <div class="col-span-2 sm:col-span-4 xl:col-span-4">
-                        <h3 class="font-semibold text-black">old watch</h3>
-                        <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div>
-                    <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic ">$16</div>
-            
-                    <div class="col-span-2 sm:col-span-1 xl:col-span-1">
-                        <img
-                        alt="..."
-                        src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80"
-                        class="h-24 w-24 rounded  mx-auto"
-                        />
-                    </div>
-                    <div class="col-span-2 sm:col-span-4 xl:col-span-4">
-                        <h3 class="font-semibold text-black">old watch</h3>
-                        <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div> 
-                    <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic ">$18</div>
+                    <% }) %>
                 </div>
+            </div>
+            <div class="flex flex-wrap justify-center mt-4">
+                <a href="/admin/addnew" class="mt-4 px-4 py-3 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-x-75 transition-transform mx-5">
+                    <i class="fas fa-plus-square text-white my-2"></i>
+                    <span class="mx-2 my-1">Add New</span>
+                </a>    
             </div>
         </div>
     </div>

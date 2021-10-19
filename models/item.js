@@ -1,20 +1,20 @@
 const mongoose = require('mongoose')
 
-const userScema = new mongoose.Schema({
+const itemScema = new mongoose.Schema({
     name : {
         type : String,
         require : true
     },
-    password : { 
+    price : { 
+        type : Number,
+        require : true
+    },
+    adminEmail : {
         type : String,
         require : true
     },
-    email : {
-        type : String,
-        require : true
-    },
-    admin : {
-        type : String,
+    stock : {
+        type : Number,
         require : true
     },
     description : {
@@ -22,4 +22,4 @@ const userScema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('User', userScema)
+module.exports = mongoose.model('item', itemScema)
