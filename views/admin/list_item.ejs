@@ -32,8 +32,8 @@
                     <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic ">$<%= item.price %> </div>
                     <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic "><%= item.stock %> </div>
                     <div class="col-span-2 sm:col-span-1 xl:col-span-1">
-                        <h1 class="font-semibold mb-2 p-2 bg-green-500 text-gray-100 text-lg rounded-lg focus:border-2 border-green-300 flex justify-center">edit</h1>
-                        <h1 class="font-semibold p-2 bg-red-500 text-gray-100 text-lg rounded-lg focus:border-2 border-red-300 flex justify-center">delete</h1>
+                        <a href="../home/item/<%= item.id %>" class="font-semibold mb-2 p-2 bg-blue-500 text-gray-100 text-lg rounded-lg focus:border-2 border-green-300 flex justify-center">detail</a>
+                        <h1 class="font-semibold p-2 bg-green-500 text-gray-100 text-lg rounded-lg focus:border-2 border-red-300 flex justify-center">edit</h1>
                     </div>
                     <% }) %>
                 </div>
