@@ -19,6 +19,10 @@ const userScema = new mongoose.Schema({
     },
     description : {
         type : String
+    },
+    location : {
+        type : Number,
+        require : true
     }
 })
 

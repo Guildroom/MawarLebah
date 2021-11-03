@@ -3,9 +3,11 @@ const mongoose = require('mongoose')
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+
 const userRouter = require('./router/user')
 const homeRouter = require('./router/Home')
 const adminRouter = require('./router/admin')
+const kurirRouter = require('./router/kurir')
 
 const app = express()
 
@@ -51,5 +53,6 @@ app.get('/',async (req,res)=>{
 app.use('/user', userRouter)
 app.use('/home', homeRouter)
 app.use('/admin', adminRouter)
+app.use('/kurir', kurirRouter)
 
 app.listen(3000)

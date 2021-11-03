@@ -30,7 +30,7 @@ router.get('/editprofile', ensureAuthenticated, (req, res) => res.render('user/e
 }))
 
 router.post('/register',(req,res)=>{
-    const { name, email, password, admin} = req.body;
+    const { name, email, password, admin, location} = req.body;
     let errors = [];
     if (!name || !email || !password) {
         errors.push({ msg: 'Please enter all fields' });
@@ -62,7 +62,8 @@ router.post('/register',(req,res)=>{
                     name,
                     email,
                     password,
-                    admin
+                    admin,
+                    location
                 });
                 bycrypt.genSalt(10, (err, salt) => {
                     bycrypt.hash(newUser.password, salt, (err, hash) => {
