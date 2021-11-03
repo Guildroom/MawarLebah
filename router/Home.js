@@ -26,7 +26,6 @@ router.get('/cart',ensureAuthenticated, async(req, res)=> {
         adminID = p.adminID
         totalCart += 1
     })
-    console.log(adminID)
     const admin = await User.findOne({_id : adminID})
     let location = 0
     if(admin.location < req.user.location){
@@ -34,7 +33,6 @@ router.get('/cart',ensureAuthenticated, async(req, res)=> {
     } else {
         location = admin.location - req.user.location
     }
-    console.log(location)
     res.render('user/cart', {
         location :location,
         kurir : kurir,
@@ -77,7 +75,6 @@ router.post('/item/:id', ensureAuthenticated, async(req, res) =>{
     let errors = [];
     const item = await Item.findById(req.params.id)
     const admin = await User.findOne().where({email : item.adminEmail})
-    console.log(admin.name)
     Cart.findOne({userEmail : req.user.email}).then(cart =>{
         if(cart) {
             if(admin.id == cart.adminID) {
