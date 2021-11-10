@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Cart</title>
   <style>
     #summary {
       background-color: #f6f6f6;
@@ -70,7 +70,7 @@
               <label class="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
               <select name="kurir" id="kurir" class="block p-2 text-gray-600 w-full text-sm">
                 <% kurir.forEach(kurir => { %> 
-                  <option value="<%= kurir.namaPerusahaan %> "><%= kurir.namaPerusahaan %>  - $<%=kurir.price *location %> </option>
+                  <option value="<%=kurir.namaPerusahaan%>"><%= kurir.namaPerusahaan %>  - $<%=kurir.price *location %> </option>
                 <% }) %>
               </select>
             </div>

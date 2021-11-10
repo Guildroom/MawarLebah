@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header') %> 
+    <title>Payment</title>
+</head>
+<body>
+    <div class="h-screen"> 
+        <div class="h-full bg-indigo-50 space-y-8">
+            <%-include('navbar') %>
+            <div class="p-4 mx-12 relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
+                <div class="flex flex-row items-center border-b sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0">
+                    <div class="text-yellow-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 sm:w-5 h-6 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="text-sm font-medium ml-3">Checkout</div>
+                </div>
+                <div class="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">Check your shipping and payment details below.</div>
+                <div class="absolute sm:relative sm:top-auto sm:right-auto ml-auto right-4 top-4 text-gray-400 hover:text-gray-800 cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+            </div>
+            <div class="rounded-md mx-12">
+                <form>
+                    <section>
+                        <h2 class="uppercase tracking-wide text-lg font-semibold text-gray-700 my-2">Shipping & Billing Information</h2>
+                        <fieldset class="mb-3 bg-white shadow-lg rounded text-gray-600">
+                            <label class="flex border-b border-gray-200 h-12 py-3 items-center">
+                                <span class="text-right px-2">Name</span>
+                                <span class="focus:outline-none px-3"><%= name %> </span>
+                            </label>
+                            <label class="flex border-b border-gray-200 h-12 py-3 items-center">
+                                <span class="text-right px-2">Email</span>
+                                <span class="focus:outline-none px-3"><%= email %> </span>
+                            </label>
+                            <label class="flex border-b border-gray-200 h-12 py-3 items-center">
+                                <span class="text-right px-2">Address</span>
+                                <span class="focus:outline-none px-3"><%= location %> </span>
+                            </label>
+                            <label class="flex border-b border-gray-200 h-12 py-3 items-center">
+                                <span class="text-right px-2">Sender Address</span>
+                                <span class="focus:outline-none px-3"><%= sender %> </span>
+                            </label>
+                            <label class="inline-flex w-2/4 border-gray-200 py-3">
+                                <span class="text-right px-2">Currier</span>
+                                <span class="focus:outline-none px-3"><%= kurir %> </span>
+                            </label>
+                        </fieldset>
+                    </section>
+                </form>
+            </div>
+            <div class="rounded-md mx-12">
+                <section>
+                    <h2 class="uppercase tracking-wide text-lg font-semibold text-gray-700 my-2">Payment Method</h2>
+                    <div class="flex flex-col mb-3">
+                        <label class="inline-flex items-center mb-1 mt-3">
+                            <input type="radio" class="form-radio h-5 w-5 text-gray-600 mr-2" name="payment" value="1" checked>
+                            <img src="https://th.bing.com/th/id/R.e1c7f67bc7cff271b873d1179c8dc66e?rik=KHSfjC2plrExlw&riu=http%3a%2f%2fcliparts.co%2fcliparts%2fLTd%2fj8y%2fLTdj8y8pc.png&ehk=ViXr2V%2fPCMHfV0bperBixMpjTqcQSiDDN5A4iMehBoo%3d&risl=&pid=ImgRaw&r=0" alt="fa-paypal" height="20" width="20">
+                            <span class="text-right font-bold px-1">MawarPay</span>
+                        </label>
+                        <label class="inline-flex items-center mb-1 mt-3">
+                            <input type="radio" class="form-radio h-5 w-5 text-gray-600 mr-2" name="payment" value="2" checked>
+                            <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png" alt="fa-paypal" height="70" width="70">
+                        </label>
+            
+                        <label class="inline-flex items-center mt-3">
+                            <input type="radio" class="form-radio h-5 w-5 text-red-600 mr-2" name="payment" value="3" checked>
+                            <img src="https://onlinejek.com/wp-content/uploads/2021/05/logo-gopay.jpg" alt="GoPay" height="70" width="70">
+                        </label>
+            
+                        <label class="inline-flex items-center mt-3">
+                            <input type="radio" class="form-radio h-5 w-5 text-orange-600 mr-2" name="payment" value="4" checked>
+                            <img src="https://1.bp.blogspot.com/-Iq0Ztu117_8/XzNYaM4ABdI/AAAAAAAAHA0/MabT7B02ErIzty8g26JvnC6cPeBZtATNgCLcBGAsYHQ/s1000/logo-ovo.png" alt="OVO" height="60" width="60">
+                        </label>
+                    </div>
+                </section>
+            </div>
+            <div class="mx-12">
+                <form action="/home/payment" method="Post">
+                    <button class="submit-button px-4 py-3 rounded-full bg-pink-400 text-white focus:ring focus:outline-none w-full text-xl font-semibold transition-colors">
+                        Pay $<%= total %> 
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

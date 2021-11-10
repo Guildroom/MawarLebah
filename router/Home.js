@@ -60,11 +60,7 @@ router.post('/cart', async(req,res)=>{
     } else {
         location = admin.location - req.user.location
     }
-    let nama = req.body.kurir
-    console.log(nama)
-    const kurir = await Kurir.findOne({namaPerusahaan : nama})
-    console.log(req.body.kurir)
-    console.log(kurir.id)
+    const kurir = await Kurir.findOne({namaPerusahaan : req.body.kurir})
     total += kurir.price*location
     cart.forEach(p=>{
         let ship = new Ship()
@@ -75,11 +71,11 @@ router.post('/cart', async(req,res)=>{
         ship.total = total
         try{
             ship = ship.save()
-            res.redirect('/home')
         }catch(e){
             console.log(e)
         }
     })
+    res.redirect('/home/payment')
 })
 
 router.get('/', ensureAuthenticated, async(req, res) => {
@@ -154,4 +150,64 @@ router.post('/item/:id', ensureAuthenticated, async(req, res) =>{
     })
 })
 
+router.get('/payment', ensureAuthenticated, async(req,res)=>{
+    const ship = await Ship.find({emailUser : req.user.email},{ship : false})
+    ship.forEach(p=>{
+        adminID = p.adminID
+        kurirID =p.kurirID
+        total = p.total
+    })
+    const admin = await User.findOne({_id : adminID})
+    const kurir = await Kurir.findOne({_id : kurirID})
+    let senderlocation = "location"
+    switch(admin.location){
+        case 1 :
+            senderlocation = "bali"
+            break
+        case 2 :
+            senderlocation = "jawa timur"
+            break
+        case 3 :
+            senderlocation = "jawa tengah"
+            break
+        case 4 :
+            senderlocation = "jawa barat"
+            break
+    }
+    let location = "location"
+    switch(req.user.location){
+        case 1 :
+            location = "bali"
+            break
+        case 2 :
+            location = "jawa timur"
+            break
+        case 3 :
+            location = "jawa tengah"
+            break
+        case 4 :
+            location = "jawa barat"
+            break
+    }
+    res.render('user/pay', {
+        name: req.user.name,
+        email : req.user.email,
+        sender : senderlocation,
+        location : location,
+        kurir : kurir.namaPerusahaan,
+        total : total
+})})
+
+router.post('/payment',ensureAuthenticated, async(req,res)=>{
+    const ship = await Ship.find({emailUser : req.user.email})
+    ship.forEach(p=>{
+        p.ship = true
+        try {
+            p = p.save()
+        }catch(e){
+            console.log(e)
+        }
+    })
+    res.redirect('/home')
+})
 module.exports = router

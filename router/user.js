@@ -20,6 +20,7 @@ router.get('/item',(req, res)=> {
 router.get('/', ensureAuthenticated, (req, res) => res.render('user/index', {
     name: req.user.name,
     email: req.user.email,
+    mawarpay: req.user.mawarpay,
     deskripsi: req.user.description
 }))
 
