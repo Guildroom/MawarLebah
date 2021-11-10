@@ -3,6 +3,7 @@ const Item = require('./../models/item')
 const User = require('./../models/User')
 const Cart = require('./../models/cart')
 const Kurir = require('./../models/kurir')
+const Ship = require('./../models/shipping')
 const Tracker = require('./../models/tracker')
 const { ensureAuthenticated } = require('../config/checkAuth')
 const router = express.Router()
@@ -40,6 +41,44 @@ router.get('/cart',ensureAuthenticated, async(req, res)=> {
         sum : sum,
         cart : cart,
         name: req.user.name
+    })
+})
+
+router.post('/cart', async(req,res)=>{
+    let user = await User.findById(req.user._id)
+    const cart = await Cart.find({userEmail : req.user.email}).sort({name: 'desc'})
+    let adminID = 'admin'
+    let total = 0
+    cart.forEach(p=>{
+        total += p.total
+        adminID = p.adminID
+    })
+    const admin = await User.findOne({_id : adminID})
+    let location = 0
+    if(admin.location < req.user.location){
+        location = req.user.location - admin.location
+    } else {
+        location = admin.location - req.user.location
+    }
+    let nama = req.body.kurir
+    console.log(nama)
+    const kurir = await Kurir.findOne({namaPerusahaan : nama})
+    console.log(req.body.kurir)
+    console.log(kurir.id)
+    total += kurir.price*location
+    cart.forEach(p=>{
+        let ship = new Ship()
+        ship.emailUser = req.user.email
+        ship.adminID = p.adminID
+        ship.cartID = p.id
+        ship.kurirID = kurir.id
+        ship.total = total
+        try{
+            ship = ship.save()
+            res.redirect('/home')
+        }catch(e){
+            console.log(e)
+        }
     })
 })
 

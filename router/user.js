@@ -23,11 +23,30 @@ router.get('/', ensureAuthenticated, (req, res) => res.render('user/index', {
     deskripsi: req.user.description
 }))
 
+router.get('/topup', ensureAuthenticated, (req, res)=> {
+    res.render('user/topup', {
+        name: req.user.name
+    })
+})
+
 router.get('/editprofile', ensureAuthenticated, (req, res) => res.render('user/editProfile', {
     name: req.user.name,
     email: req.user.email,
     deskripsi: req.user.description
 }))
+
+router.post('/topup', async(req,res)=>{
+    let user = await User.findById(req.user._id)
+    let total = Number(req.user.mawarpay)
+    total += Number(req.body.total)
+    user.mawarpay = total
+    try{
+        user = await user.save()
+        res.redirect('/user')
+    } catch(e){
+        console.log(e)
+    }
+})
 
 router.post('/register',(req,res)=>{
     const { name, email, password, admin, location} = req.body;

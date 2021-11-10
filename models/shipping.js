@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const kurirScema = new mongoose.Schema({
+const shippingScema = new mongoose.Schema({
     emailUser : {
         type : String,
         require : true
@@ -9,8 +9,16 @@ const kurirScema = new mongoose.Schema({
         type : String,
         require : true
     },
-    cartID : { 
+    cartID : {
+        type :String,
+        require : true
+    },
+    kurirID : { 
         type : String,
+        require : true
+    },
+    total : {
+        type : Number,
         require : true
     },
     shipAt : {
@@ -19,4 +27,4 @@ const kurirScema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('kurir', kurirScema)
+module.exports = mongoose.model('shipping', shippingScema)

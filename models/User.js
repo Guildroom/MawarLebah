@@ -23,6 +23,11 @@ const userScema = new mongoose.Schema({
     location : {
         type : Number,
         require : true
+    },
+    mawarpay : {
+        type : Number,
+        require : true,
+        default : 0
     }
 })
 
