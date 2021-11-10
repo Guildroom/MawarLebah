@@ -200,14 +200,23 @@ router.get('/payment', ensureAuthenticated, async(req,res)=>{
 
 router.post('/payment',ensureAuthenticated, async(req,res)=>{
     const ship = await Ship.find({emailUser : req.user.email})
+    let user = await User.findById(req.user._id)
     ship.forEach(p=>{
+        total = p.total
         p.ship = true
+        p.status = "getting currier"
         try {
             p = p.save()
         }catch(e){
             console.log(e)
         }
     })
+    user.mawarpay -= total
+    try{
+        user = user.save()
+    }catch(e){
+        console.log(e)
+    }
     res.redirect('/home')
 })
 module.exports = router

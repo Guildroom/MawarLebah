@@ -29,6 +29,10 @@ const shippingScema = new mongoose.Schema({
     shipAt : {
         type : Date,
         default: Date.now
+    },
+    status : {
+        type : String,
+        default : ""
     }
 })
 
