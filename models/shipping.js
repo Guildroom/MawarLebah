@@ -17,6 +17,11 @@ const shippingScema = new mongoose.Schema({
         type : String,
         require : true
     },
+    ship : {
+        type : Boolean,
+        default : false,
+        require : true
+    },
     total : {
         type : Number,
         require : true
