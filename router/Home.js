@@ -203,7 +203,6 @@ router.post('/payment',ensureAuthenticated, async(req,res)=>{
     let user = await User.findById(req.user._id)
     ship.forEach(p=>{
         total = p.total
-        p.ship = true
         p.status = "getting currier"
         try {
             p = p.save()

@@ -8,7 +8,8 @@ const cartScema = new mongoose.Schema({
         require : true
     },
     itemID : {
-        type : String,
+        type : Schema.Types.ObjectId,
+        ref : 'item',
         require : true
     },
     itemPrice : {
@@ -26,6 +27,7 @@ const cartScema = new mongoose.Schema({
     },
     adminID : {
         type : Schema.Types.ObjectId,
+        ref : 'User',
         require : true
     }
 })

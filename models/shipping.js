@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
 
 const shippingScema = new mongoose.Schema({
     emailUser : {
@@ -6,15 +7,18 @@ const shippingScema = new mongoose.Schema({
         require : true
     },
     adminID : { 
-        type : String,
+        type : Schema.Types.ObjectId,
+        ref : 'User',
         require : true
     },
     cartID : {
-        type :String,
+        type : Schema.Types.ObjectId,
+        ref : 'cart',
         require : true
     },
     kurirID : { 
-        type : String,
+        type : Schema.Types.ObjectId,
+        ref : 'kurir',
         require : true
     },
     ship : {

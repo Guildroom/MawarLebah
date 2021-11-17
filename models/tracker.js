@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
 
 const trackerScema = new mongoose.Schema({
     userEmail : {
@@ -6,7 +7,8 @@ const trackerScema = new mongoose.Schema({
         require : true
     },
     itemID : { 
-        type : String,
+        type : Schema.Types.ObjectId,
+        ref : 'item',
         require : true
     },
     clickAT : {
